@@ -1,0 +1,36 @@
+{
+  "name": "opencode-text-tools",
+  "version": "1.0.0",
+  "description": "Reusable text analysis toolbox for OpenCode plugins — metrics, AI pattern detection, structure analysis",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": ["dist", "README.md"],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "syllable": "^5.0.1",
+    "flesch": "^2.0.1",
+    "flesch-kincaid": "^2.0.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3",
+    "@types/node": "^22.0.0",
+    "@opencode-ai/plugin": "*",
+    "vitest": "^3.1.0"
+  },
+  "peerDependencies": {
+    "@opencode-ai/plugin": "*"
+  },
+  "keywords": ["opencode", "plugin", "text-analysis", "ai-detection", "writing"],
+  "license": "MIT"
+}

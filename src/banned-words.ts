@@ -1,0 +1,5 @@
+export const BANNED_ADJECTIVES = ["innovative", "revolutionary", "game-changing", "state-of-the-art", "unprecedented", "cutting-edge", "outstanding"]
+export const BANNED_ADVERBS = ["drastically"]
+export const BANNED_NOUNS = ["game-changer", "breakthrough solution"]
+export const BANNED_VERBS = ["Weave", "Empower", "Revolutionize", "Disrupt", "Synergize", "Leverage", "Innovate", "Transform", "Ignite", "Catalyze", "Optimize", "Reimagine", "Accelerate", "Unleash", "Streamline", "Amplify", "Elevate", "Orchestrate"]
+export const ALL_BANNED_WORDS = [...BANNED_ADJECTIVES, ...BANNED_ADVERBS, ...BANNED_NOUNS, ...BANNED_VERBS.map((w) => w.toLowerCase())]

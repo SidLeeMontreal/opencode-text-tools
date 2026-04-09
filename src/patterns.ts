@@ -46,11 +46,18 @@ function scanByRegex(text: string, id: string, regexes: RegExp[] | undefined, ca
 
 export function detectBannedWords(text: string): { found: string[]; count: number; locations: string[] } {
   const found = ALL_BANNED_WORDS.filter((word) => new RegExp(`\\b${escapeRegExp(word)}\\b`, "i").test(text))
-  const locations = found.map((word) => {
-    const index = text.toLowerCase().indexOf(word.toLowerCase())
-    return `${word} (${locationHint(text, Math.max(0, index))})`
-  })
-  return { found, count: found.length, locations }
+  const locations: string[] = []
+  let count = 0
+
+  for (const word of found) {
+    const regex = new RegExp(`\\b${escapeRegExp(word)}\\b`, "gi")
+    for (const match of text.matchAll(regex)) {
+      count += 1
+      locations.push(`${word} (${locationHint(text, match.index ?? 0)})`)
+    }
+  }
+
+  return { found, count, locations }
 }
 
 export function detectFillerPhrases(text: string): PatternMatch[] {
@@ -73,6 +80,13 @@ export function detectEmDashes(text: string): { count: number; overused: boolean
 export function detectRuleOfThree(text: string): PatternMatch[] {
   const pattern = AI_PATTERN_MAP.rule_of_three
   return scanByRegex(text, pattern.id, pattern.regexes, pattern.category, pattern.severity, pattern.explanation, pattern.fixSuggestion)
+    .filter((match) => {
+      const start = text.indexOf(match.matchedText)
+      const end = start + match.matchedText.length
+      const before = text.slice(Math.max(0, start - 3), start)
+      const after = text.slice(end, end + 2)
+      return !before.includes(",") && !after.includes(",")
+    })
 }
 
 export function detectHedging(text: string): PatternMatch[] {

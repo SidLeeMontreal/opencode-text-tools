@@ -30,7 +30,7 @@ export function detectFormat(text: string): FormatDetectionResult {
   const scores = {
     article: Math.min(1, paragraphs * 0.18 + headings * 0.15 + (splitSentences(text).length > 4 ? 0.25 : 0)),
     social: Math.min(1, socialLength + ((text.match(/#/g) ?? []).length * 0.1) + ((text.match(/\n/g) ?? []).length < 4 ? 0.2 : 0)),
-    slide: Math.min(1, bullets * 0.12 + numbered * 0.12 + (paragraphs <= 3 ? 0.2 : 0)),
+    slide: Math.min(1, bullets * 0.18 + numbered * 0.18 + (paragraphs <= 3 ? 0.25 : 0) + ((bullets + numbered) >= 3 ? 0.15 : 0)),
     email: Math.min(1, (hasGreeting ? 0.45 : 0) + (hasSignoff ? 0.35 : 0) + (text.includes("Subject:") ? 0.15 : 0)),
     brief: Math.min(1, headings * 0.14 + bullets * 0.1 + paragraphs * 0.1),
     other: 0.05,
@@ -115,7 +115,7 @@ export function detectRepetition(text: string, windowSize = 2): RepetitionResult
           const existing = repetitions.find((item) => item.term === term)
           if (existing) {
             existing.count += 1
-            existing.sentence_indexes.push(j)
+            if (!existing.sentence_indexes.includes(j)) existing.sentence_indexes.push(j)
             existing.distance = Math.min(existing.distance, j - i)
           } else {
             repetitions.push({ term, count: 2, sentence_indexes: [i, j], distance: j - i })

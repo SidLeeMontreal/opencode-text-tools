@@ -11,26 +11,37 @@
       "types": "./dist/index.d.ts"
     }
   },
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
-    "test": "vitest run"
+    "test": "vitest run",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "syllable": "^5.0.1",
     "flesch": "^2.0.1",
-    "flesch-kincaid": "^2.0.1"
+    "flesch-kincaid": "^2.0.1",
+    "syllable": "^5.0.1"
   },
   "devDependencies": {
-    "typescript": "^5.8.3",
-    "@types/node": "^22.0.0",
     "@opencode-ai/plugin": "*",
+    "@types/node": "^22.0.0",
+    "@vitest/coverage-v8": "^3.2.4",
+    "typescript": "^5.8.3",
     "vitest": "^3.1.0"
   },
   "peerDependencies": {
     "@opencode-ai/plugin": "*"
   },
-  "keywords": ["opencode", "plugin", "text-analysis", "ai-detection", "writing"],
+  "keywords": [
+    "opencode",
+    "plugin",
+    "text-analysis",
+    "ai-detection",
+    "writing"
+  ],
   "license": "MIT"
 }

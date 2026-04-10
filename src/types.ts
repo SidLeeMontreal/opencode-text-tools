@@ -33,6 +33,7 @@ export interface AgentCapabilityOutput<T = unknown> {
   artifact: T
   rendered: string
   chained_to?: string
+  chain_result?: unknown
   assumptions?: string[]
 }
 

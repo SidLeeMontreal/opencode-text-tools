@@ -23,6 +23,19 @@ export interface MaskedText {
   maskedRegions: MaskedRegion[]
 }
 
+export interface AgentCapabilityOutput<T = unknown> {
+  agent: string
+  capability: string
+  mode?: string
+  version: string
+  timestamp: string
+  input_summary: string
+  artifact: T
+  rendered: string
+  chained_to?: string
+  assumptions?: string[]
+}
+
 export interface ScanMeta {
   text_length: number
   analyzed_text_length: number
